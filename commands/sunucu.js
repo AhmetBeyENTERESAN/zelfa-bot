@@ -1,0 +1,40 @@
+const Discord = require("discord.js");
+const Gamedig = require("gamedig"); 
+exports.run = (client, message, args) => {
+
+  
+  Gamedig.query({
+    type: "mtasa",
+    host: "217.195.202.234"
+  })
+
+    .then(state => {
+      const client = new Discord.MessageEmbed()
+      .setColor(`Blue`)
+      .addField(`Map :`,` - İstanbul`,true)
+      .addField(`Gametype :`,` - ${state.raw.gametype}`,true)
+      .addField(`Sunucu Sahibi :`,` - ENTERESAN`,true)
+      .addField(`Developer :`,` - ENTERESAN -Whisky & Swan & Unreachable`,true)
+      .addField(`Player :`,` - ${state.raw.numplayers}/${state.maxplayers}`,true)
+      .addField(`Ping:`,` - ${state.ping}ms`,true)
+      .addField(`IP:`,` - ${state.connect}`,true)
+      .setImage("")
+      .setTimestamp()
+	    .setFooter("ZelfaRPG | ENTERESAN");
+      message.channel.send(client);
+    })
+
+.catch(err =>
+  
+       
+      console.log(err)
+    );
+  
+};
+
+exports.conf = {
+    aliases: ['sunucu']
+}
+exports.help = {
+    name: "sunucu"
+}
